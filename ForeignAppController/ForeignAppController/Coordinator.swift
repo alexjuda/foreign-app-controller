@@ -4,11 +4,14 @@ import AppKit
 
 class Coordinator {
     let memIO: MemoryIOAdapter
+    let keyboardEffector: KeyboardEffector
     let server: ServiceServer
     
     init(targetPID: pid_t, serverAddress: String = "localhost:1337") {
         memIO = MemoryIOAdapter(pid: targetPID)
-        server = ServiceServer(address: serverAddress, serviceProviders: [memIO])
+        keyboardEffector = KeyboardEffector(pid: targetPID)
+        server = ServiceServer(address: serverAddress,
+                               serviceProviders: [memIO, keyboardEffector])
     }
     
     func start() {
