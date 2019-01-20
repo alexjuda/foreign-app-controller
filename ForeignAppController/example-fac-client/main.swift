@@ -30,9 +30,9 @@ keyStroke.key = .arrowUp
 keyStroke.modifier = .none
 
 do {
-    try keyboardClient.press(keyStroke)
+    let _ = try keyboardClient.press(keyStroke)
     sleep(1)
-    try keyboardClient.release(keyStroke)
+    let _ = try keyboardClient.release(keyStroke)
 } catch {
     print("Error: \(error)")
 }
