@@ -49,6 +49,34 @@ struct MemoryReadResponse {
   init() {}
 }
 
+struct MemoryWriteRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var address: UInt32 = 0
+
+  var bytesToWrite: Data = SwiftProtobuf.Internal.emptyData
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct MemoryWriteResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var address: UInt32 = 0
+
+  var resultCode: Int32 = 0
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 extension MemoryReadRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
@@ -121,6 +149,76 @@ extension MemoryReadResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
   static func ==(lhs: MemoryReadResponse, rhs: MemoryReadResponse) -> Bool {
     if lhs.address != rhs.address {return false}
     if lhs.readBytes != rhs.readBytes {return false}
+    if lhs.resultCode != rhs.resultCode {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension MemoryWriteRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = "MemoryWriteRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "address"),
+    2: .standard(proto: "bytes_to_write"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularUInt32Field(value: &self.address)
+      case 2: try decoder.decodeSingularBytesField(value: &self.bytesToWrite)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.address != 0 {
+      try visitor.visitSingularUInt32Field(value: self.address, fieldNumber: 1)
+    }
+    if !self.bytesToWrite.isEmpty {
+      try visitor.visitSingularBytesField(value: self.bytesToWrite, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: MemoryWriteRequest, rhs: MemoryWriteRequest) -> Bool {
+    if lhs.address != rhs.address {return false}
+    if lhs.bytesToWrite != rhs.bytesToWrite {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension MemoryWriteResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = "MemoryWriteResponse"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "address"),
+    2: .standard(proto: "result_code"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularUInt32Field(value: &self.address)
+      case 2: try decoder.decodeSingularInt32Field(value: &self.resultCode)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.address != 0 {
+      try visitor.visitSingularUInt32Field(value: self.address, fieldNumber: 1)
+    }
+    if self.resultCode != 0 {
+      try visitor.visitSingularInt32Field(value: self.resultCode, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: MemoryWriteResponse, rhs: MemoryWriteResponse) -> Bool {
+    if lhs.address != rhs.address {return false}
     if lhs.resultCode != rhs.resultCode {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true

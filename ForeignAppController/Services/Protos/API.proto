@@ -11,6 +11,17 @@ message MemoryReadResponse {
     int32 result_code = 3;
 }
 
+message MemoryWriteRequest {
+    uint32 address = 1;
+    bytes bytes_to_write = 2;
+}
+
+message MemoryWriteResponse {
+    uint32 address = 1;
+    int32 result_code = 2;
+}
+
 service MemoryIO {
     rpc Read (MemoryReadRequest) returns (MemoryReadResponse);
+    rpc Write (MemoryWriteRequest) returns (MemoryWriteResponse);
 }

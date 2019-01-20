@@ -31,6 +31,12 @@ fileprivate final class MemoryIOReadCallBase: ClientCallUnaryBase<MemoryReadRequ
   override class var method: String { return "/MemoryIO/Read" }
 }
 
+internal protocol MemoryIOWriteCall: ClientCallUnary {}
+
+fileprivate final class MemoryIOWriteCallBase: ClientCallUnaryBase<MemoryWriteRequest, MemoryWriteResponse>, MemoryIOWriteCall {
+  override class var method: String { return "/MemoryIO/Write" }
+}
+
 
 /// Instantiate MemoryIOServiceClient, then call methods of this protocol to make API calls.
 internal protocol MemoryIOService: ServiceClient {
@@ -38,6 +44,11 @@ internal protocol MemoryIOService: ServiceClient {
   func read(_ request: MemoryReadRequest) throws -> MemoryReadResponse
   /// Asynchronous. Unary.
   func read(_ request: MemoryReadRequest, completion: @escaping (MemoryReadResponse?, CallResult) -> Void) throws -> MemoryIOReadCall
+
+  /// Synchronous. Unary.
+  func write(_ request: MemoryWriteRequest) throws -> MemoryWriteResponse
+  /// Asynchronous. Unary.
+  func write(_ request: MemoryWriteRequest, completion: @escaping (MemoryWriteResponse?, CallResult) -> Void) throws -> MemoryIOWriteCall
 
 }
 
@@ -53,6 +64,17 @@ internal final class MemoryIOServiceClient: ServiceClientBase, MemoryIOService {
       .start(request: request, metadata: metadata, completion: completion)
   }
 
+  /// Synchronous. Unary.
+  internal func write(_ request: MemoryWriteRequest) throws -> MemoryWriteResponse {
+    return try MemoryIOWriteCallBase(channel)
+      .run(request: request, metadata: metadata)
+  }
+  /// Asynchronous. Unary.
+  internal func write(_ request: MemoryWriteRequest, completion: @escaping (MemoryWriteResponse?, CallResult) -> Void) throws -> MemoryIOWriteCall {
+    return try MemoryIOWriteCallBase(channel)
+      .start(request: request, metadata: metadata, completion: completion)
+  }
+
 }
 
 /// To build a server, implement a class that conforms to this protocol.
@@ -60,6 +82,7 @@ internal final class MemoryIOServiceClient: ServiceClientBase, MemoryIOService {
 /// it is expected that you have already returned a status to the client by means of `session.close`.
 internal protocol MemoryIOProvider: ServiceProvider {
   func read(request: MemoryReadRequest, session: MemoryIOReadSession) throws -> MemoryReadResponse
+  func write(request: MemoryWriteRequest, session: MemoryIOWriteSession) throws -> MemoryWriteResponse
 }
 
 extension MemoryIOProvider {
@@ -74,6 +97,11 @@ extension MemoryIOProvider {
         handler: handler,
         providerBlock: { try self.read(request: $0, session: $1 as! MemoryIOReadSessionBase) })
           .run()
+    case "/MemoryIO/Write":
+      return try MemoryIOWriteSessionBase(
+        handler: handler,
+        providerBlock: { try self.write(request: $0, session: $1 as! MemoryIOWriteSessionBase) })
+          .run()
     default:
       throw HandleMethodError.unknownMethod
     }
@@ -83,4 +111,8 @@ extension MemoryIOProvider {
 internal protocol MemoryIOReadSession: ServerSessionUnary {}
 
 fileprivate final class MemoryIOReadSessionBase: ServerSessionUnaryBase<MemoryReadRequest, MemoryReadResponse>, MemoryIOReadSession {}
+
+internal protocol MemoryIOWriteSession: ServerSessionUnary {}
+
+fileprivate final class MemoryIOWriteSessionBase: ServerSessionUnaryBase<MemoryWriteRequest, MemoryWriteResponse>, MemoryIOWriteSession {}
 
