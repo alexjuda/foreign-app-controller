@@ -25,3 +25,6 @@ guard let pid = finder.findPID(bundleIdentifier: bundleIdentifier) else {
     print("No app with bundle identifier '\(bundleIdentifier)' found!")
     abort()
 }
+
+let coordinator = Coordinator(pid: pid)
+coordinator.start()

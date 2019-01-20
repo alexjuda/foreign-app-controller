@@ -16,7 +16,7 @@ class Coordinator {
     
     init(pid: pid_t) {
         apiMemIO = APIMemoryIO(pid: pid)
-        server = ServiceServer(address: "localhost", serviceProviders: [apiMemIO])
+        server = ServiceServer(address: "localhost:1337", serviceProviders: [apiMemIO])
     }
     
     func start() {

@@ -23,13 +23,12 @@ struct APIMemoryIO: MemoryIOProvider {
             var response = MemoryReadResponse()
             response.address = request.address
             response.readBytes = data
-//            response.kernelResult =
             return response
         } catch let error as NSError {
-            
+            var response = MemoryReadResponse()
+            response.address = request.address
+            response.kernelResult = Int32(error.code)
+            return response
         }
-        
-        let response = MemoryReadResponse()
-        return response
     }
 }
