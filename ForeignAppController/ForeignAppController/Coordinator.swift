@@ -22,6 +22,10 @@ class Coordinator {
     func start() {
         server.start()
     }
+    
+    var serverAddress: String {
+        return server.address
+    }
 }
 
 class ProcessFinder {

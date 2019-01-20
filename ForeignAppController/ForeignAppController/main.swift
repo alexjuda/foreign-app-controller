@@ -28,3 +28,6 @@ guard let pid = finder.findPID(bundleIdentifier: bundleIdentifier) else {
 
 let coordinator = Coordinator(pid: pid)
 coordinator.start()
+print("Starting gRPC server on \(coordinator.serverAddress)")
+
+RunLoop.current.run()
