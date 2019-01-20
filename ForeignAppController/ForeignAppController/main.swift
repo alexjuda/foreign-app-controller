@@ -8,7 +8,9 @@
 
 import Foundation
 import SwiftProtobuf
+import SwiftGRPC
 
 print("Hello, World!")
 
 print(SwiftProtobuf.Version.versionString)
+print(SwiftGRPC.gRPC.version)
