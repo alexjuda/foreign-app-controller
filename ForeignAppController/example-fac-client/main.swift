@@ -1,11 +1,3 @@
-//
-//  main.swift
-//  example-fac-client
-//
-//  Created by Alexander Juda on 20/01/2019.
-//  Copyright © 2019 Brand Amandli. All rights reserved.
-//
-
 import Foundation
 
 let client = MemoryIOServiceClient(address: "localhost:1337",
