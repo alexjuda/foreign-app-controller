@@ -10,8 +10,8 @@ import Foundation
 import SwiftProtobuf
 import SwiftGRPC
 
-print(SwiftProtobuf.Version.versionString)
-print(SwiftGRPC.gRPC.version)
+print("SwiftProtobuf version: ", SwiftProtobuf.Version.versionString)
+print("SwiftGRPC version: ", SwiftGRPC.gRPC.version)
 
 guard CommandLine.arguments.count >= 2 else {
     print("No target app bundle identifier provided!")
@@ -26,8 +26,9 @@ guard let pid = finder.findPID(bundleIdentifier: bundleIdentifier) else {
     abort()
 }
 
-let coordinator = Coordinator(pid: pid)
+let coordinator = Coordinator(targetPID: pid)
 coordinator.start()
 print("Starting gRPC server on \(coordinator.serverAddress)")
+
 
 RunLoop.current.run()
