@@ -25,7 +25,8 @@
                           pid:(pid_t)pid
                         error:(NSError **)errorPointer {
     mach_port_t slaveTaskPort = [self taskPortForPID:pid];
-    void *buffer = NULL;
+    
+    void *buffer = malloc(bytesCount);
     UInt64 readBytesCount;
     kern_return_t kr = mach_vm_read_overwrite(slaveTaskPort,
                                               address,
@@ -34,21 +35,23 @@
                                               &readBytesCount);
     
     if (kr != KERN_SUCCESS) {
-        *errorPointer = [NSError errorWithDomain:@"com.ba.ForeignAppController.MemoryIO.KernelError"
+        *errorPointer = [NSError errorWithDomain:@"com.ba.ForeignAppController.TargetMemoryIO.KernelError"
                                             code:kr
                                         userInfo:nil];
+        free(buffer);
         return nil;
     }
     
     if (readBytesCount != bytesCount) {
-        *errorPointer = [NSError errorWithDomain:@"com.ba.ForeignAppController.MemoryIO.ReadingError"
+        *errorPointer = [NSError errorWithDomain:@"com.ba.ForeignAppController.TargetMemoryIO.ReadingError"
                                             code:-1
                                         userInfo:nil];
-        
+        free(buffer);
         return nil;
     }
     
     NSData *data = [NSData dataWithBytes:buffer length:readBytesCount];
+    free(buffer);
     return data;
 }
 
