@@ -19,6 +19,11 @@ NS_ASSUME_NONNULL_BEGIN
                                    pid:(pid_t)pid
                                  error:(NSError **)errorPointer;
 
+- (BOOL)writeData:(NSData *)data
+        toAddress:(uint32_t)address
+              pid:(pid_t)pid
+     errorPointer:(NSError **)errorPointer;
+
 @end
 
 NS_ASSUME_NONNULL_END

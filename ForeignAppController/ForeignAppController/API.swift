@@ -31,4 +31,20 @@ struct APIMemoryIO: MemoryIOProvider {
             return response
         }
     }
+    
+    func write(request: MemoryWriteRequest, session: MemoryIOWriteSession) throws -> MemoryWriteResponse {
+        do {
+            try targetMemIO.write(request.bytesToWrite,
+                                  toAddress: request.address,
+                                  pid: pid)
+            var response = MemoryWriteResponse()
+            response.address = request.address
+            return response
+        } catch let error as NSError {
+            var response = MemoryWriteResponse()
+            response.address = request.address
+            response.resultCode = Int32(error.code)
+            return response
+        }
+    }
 }

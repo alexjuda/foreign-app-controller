@@ -35,7 +35,7 @@
                                               &readBytesCount);
     
     if (kr != KERN_SUCCESS) {
-        *errorPointer = [NSError errorWithDomain:@"com.ba.ForeignAppController.TargetMemoryIO.KernelError"
+        *errorPointer = [NSError errorWithDomain:@"com.ba.ForeignAppController.TargetMemoryIO"
                                             code:kr
                                         userInfo:nil];
         free(buffer);
@@ -43,7 +43,7 @@
     }
     
     if (readBytesCount != bytesCount) {
-        *errorPointer = [NSError errorWithDomain:@"com.ba.ForeignAppController.TargetMemoryIO.ReadingError"
+        *errorPointer = [NSError errorWithDomain:@"com.ba.ForeignAppController.TargetMemoryIO"
                                             code:-1
                                         userInfo:nil];
         free(buffer);
@@ -53,6 +53,38 @@
     NSData *data = [NSData dataWithBytes:buffer length:readBytesCount];
     free(buffer);
     return data;
+}
+
+- (BOOL)writeData:(NSData *)data toAddress:(uint32_t)address pid:(pid_t)pid errorPointer:(NSError **)errorPointer {
+    if (address == 0) {
+        *errorPointer = [NSError errorWithDomain:@"com.ba.ForeignAppController.TargetMemoryIO"
+                                            code:-2
+                                        userInfo:nil];
+        return NO;
+    }
+    
+    // TODO: check if PID is valid
+    
+    mach_port_t slaveTaskPort = [self taskPortForPID:pid];
+    
+    void *buffer = malloc(data.length);
+    [data getBytes:buffer length:data.length];
+    
+    kern_return_t kr = mach_vm_write(slaveTaskPort,
+                                     address,
+                                     (vm_offset_t)buffer,
+                                     (mach_msg_type_number_t)data.length);
+    
+    if (kr != KERN_SUCCESS) {
+        *errorPointer = [NSError errorWithDomain:@"com.ba.ForeignAppController.TargetMemoryIO"
+                                            code:kr
+                                        userInfo:nil];
+        free(buffer);
+        return NO;
+    }
+    
+    free(buffer);
+    return YES;
 }
 
 - (mach_port_t)taskPortForPID:(pid_t)pid {
