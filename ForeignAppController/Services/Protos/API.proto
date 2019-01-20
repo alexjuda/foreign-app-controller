@@ -25,3 +25,43 @@ service MemoryIO {
     rpc Read (MemoryReadRequest) returns (MemoryReadResponse);
     rpc Write (MemoryWriteRequest) returns (MemoryWriteResponse);
 }
+
+message KeyStroke {
+    enum Key {
+        UNKNOWN = 0;
+        KEY1 = 1;
+        KEY2 = 2;
+        KEY3 = 3;
+        KEY4 = 4;
+        KEY5 = 5;
+        KEY6 = 6;
+        KEY7 = 7;
+        KEY8 = 8;
+        KEY9 = 9;
+        KEY0 = 10;
+        KEY_MINUS = 11;
+        KEY_EQUALS = 12;
+        KEY_ARROW_UP = 101;
+        KEY_ARROW_DOWN = 102;
+        KEY_ARROW_LEFT = 103;
+        KEY_ARROW_RIGHT = 104;
+        KEY_I = 201;
+    }
+    
+    enum Modifier {
+        NONE = 0;
+        OPTION = 1;
+        CONTROL = 2;
+        SHIFT = 3;
+    }
+    
+    Key key = 1;
+    Modifier modifier = 2;
+}
+
+message KeyboardResponse {}
+
+service Keyboard {
+    rpc Press (KeyStroke) returns (KeyboardResponse);
+    rpc Release (KeyStroke) returns (KeyboardResponse);
+}

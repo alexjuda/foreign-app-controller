@@ -76,6 +76,57 @@ internal final class MemoryIOServiceClient: ServiceClientBase, MemoryIOService {
   }
 
 }
+internal protocol KeyboardPressCall: ClientCallUnary {}
+
+fileprivate final class KeyboardPressCallBase: ClientCallUnaryBase<KeyStroke, KeyboardResponse>, KeyboardPressCall {
+  override class var method: String { return "/Keyboard/Press" }
+}
+
+internal protocol KeyboardReleaseCall: ClientCallUnary {}
+
+fileprivate final class KeyboardReleaseCallBase: ClientCallUnaryBase<KeyStroke, KeyboardResponse>, KeyboardReleaseCall {
+  override class var method: String { return "/Keyboard/Release" }
+}
+
+
+/// Instantiate KeyboardServiceClient, then call methods of this protocol to make API calls.
+internal protocol KeyboardService: ServiceClient {
+  /// Synchronous. Unary.
+  func press(_ request: KeyStroke) throws -> KeyboardResponse
+  /// Asynchronous. Unary.
+  func press(_ request: KeyStroke, completion: @escaping (KeyboardResponse?, CallResult) -> Void) throws -> KeyboardPressCall
+
+  /// Synchronous. Unary.
+  func release(_ request: KeyStroke) throws -> KeyboardResponse
+  /// Asynchronous. Unary.
+  func release(_ request: KeyStroke, completion: @escaping (KeyboardResponse?, CallResult) -> Void) throws -> KeyboardReleaseCall
+
+}
+
+internal final class KeyboardServiceClient: ServiceClientBase, KeyboardService {
+  /// Synchronous. Unary.
+  internal func press(_ request: KeyStroke) throws -> KeyboardResponse {
+    return try KeyboardPressCallBase(channel)
+      .run(request: request, metadata: metadata)
+  }
+  /// Asynchronous. Unary.
+  internal func press(_ request: KeyStroke, completion: @escaping (KeyboardResponse?, CallResult) -> Void) throws -> KeyboardPressCall {
+    return try KeyboardPressCallBase(channel)
+      .start(request: request, metadata: metadata, completion: completion)
+  }
+
+  /// Synchronous. Unary.
+  internal func release(_ request: KeyStroke) throws -> KeyboardResponse {
+    return try KeyboardReleaseCallBase(channel)
+      .run(request: request, metadata: metadata)
+  }
+  /// Asynchronous. Unary.
+  internal func release(_ request: KeyStroke, completion: @escaping (KeyboardResponse?, CallResult) -> Void) throws -> KeyboardReleaseCall {
+    return try KeyboardReleaseCallBase(channel)
+      .start(request: request, metadata: metadata, completion: completion)
+  }
+
+}
 
 /// To build a server, implement a class that conforms to this protocol.
 /// If one of the methods returning `ServerStatus?` returns nil,
@@ -115,4 +166,43 @@ fileprivate final class MemoryIOReadSessionBase: ServerSessionUnaryBase<MemoryRe
 internal protocol MemoryIOWriteSession: ServerSessionUnary {}
 
 fileprivate final class MemoryIOWriteSessionBase: ServerSessionUnaryBase<MemoryWriteRequest, MemoryWriteResponse>, MemoryIOWriteSession {}
+
+/// To build a server, implement a class that conforms to this protocol.
+/// If one of the methods returning `ServerStatus?` returns nil,
+/// it is expected that you have already returned a status to the client by means of `session.close`.
+internal protocol KeyboardProvider: ServiceProvider {
+  func press(request: KeyStroke, session: KeyboardPressSession) throws -> KeyboardResponse
+  func release(request: KeyStroke, session: KeyboardReleaseSession) throws -> KeyboardResponse
+}
+
+extension KeyboardProvider {
+  internal var serviceName: String { return "Keyboard" }
+
+  /// Determines and calls the appropriate request handler, depending on the request's method.
+  /// Throws `HandleMethodError.unknownMethod` for methods not handled by this service.
+  internal func handleMethod(_ method: String, handler: Handler) throws -> ServerStatus? {
+    switch method {
+    case "/Keyboard/Press":
+      return try KeyboardPressSessionBase(
+        handler: handler,
+        providerBlock: { try self.press(request: $0, session: $1 as! KeyboardPressSessionBase) })
+          .run()
+    case "/Keyboard/Release":
+      return try KeyboardReleaseSessionBase(
+        handler: handler,
+        providerBlock: { try self.release(request: $0, session: $1 as! KeyboardReleaseSessionBase) })
+          .run()
+    default:
+      throw HandleMethodError.unknownMethod
+    }
+  }
+}
+
+internal protocol KeyboardPressSession: ServerSessionUnary {}
+
+fileprivate final class KeyboardPressSessionBase: ServerSessionUnaryBase<KeyStroke, KeyboardResponse>, KeyboardPressSession {}
+
+internal protocol KeyboardReleaseSession: ServerSessionUnary {}
+
+fileprivate final class KeyboardReleaseSessionBase: ServerSessionUnaryBase<KeyStroke, KeyboardResponse>, KeyboardReleaseSession {}
 

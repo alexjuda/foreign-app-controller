@@ -77,6 +77,178 @@ struct MemoryWriteResponse {
   init() {}
 }
 
+struct KeyStroke {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var key: KeyStroke.Key = .unknown
+
+  var modifier: KeyStroke.Modifier = .none
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  enum Key: SwiftProtobuf.Enum {
+    typealias RawValue = Int
+    case unknown // = 0
+    case key1 // = 1
+    case key2 // = 2
+    case key3 // = 3
+    case key4 // = 4
+    case key5 // = 5
+    case key6 // = 6
+    case key7 // = 7
+    case key8 // = 8
+    case key9 // = 9
+    case key0 // = 10
+    case minus // = 11
+    case equals // = 12
+    case arrowUp // = 101
+    case arrowDown // = 102
+    case arrowLeft // = 103
+    case arrowRight // = 104
+    case i // = 201
+    case UNRECOGNIZED(Int)
+
+    init() {
+      self = .unknown
+    }
+
+    init?(rawValue: Int) {
+      switch rawValue {
+      case 0: self = .unknown
+      case 1: self = .key1
+      case 2: self = .key2
+      case 3: self = .key3
+      case 4: self = .key4
+      case 5: self = .key5
+      case 6: self = .key6
+      case 7: self = .key7
+      case 8: self = .key8
+      case 9: self = .key9
+      case 10: self = .key0
+      case 11: self = .minus
+      case 12: self = .equals
+      case 101: self = .arrowUp
+      case 102: self = .arrowDown
+      case 103: self = .arrowLeft
+      case 104: self = .arrowRight
+      case 201: self = .i
+      default: self = .UNRECOGNIZED(rawValue)
+      }
+    }
+
+    var rawValue: Int {
+      switch self {
+      case .unknown: return 0
+      case .key1: return 1
+      case .key2: return 2
+      case .key3: return 3
+      case .key4: return 4
+      case .key5: return 5
+      case .key6: return 6
+      case .key7: return 7
+      case .key8: return 8
+      case .key9: return 9
+      case .key0: return 10
+      case .minus: return 11
+      case .equals: return 12
+      case .arrowUp: return 101
+      case .arrowDown: return 102
+      case .arrowLeft: return 103
+      case .arrowRight: return 104
+      case .i: return 201
+      case .UNRECOGNIZED(let i): return i
+      }
+    }
+
+  }
+
+  enum Modifier: SwiftProtobuf.Enum {
+    typealias RawValue = Int
+    case none // = 0
+    case option // = 1
+    case control // = 2
+    case shift // = 3
+    case UNRECOGNIZED(Int)
+
+    init() {
+      self = .none
+    }
+
+    init?(rawValue: Int) {
+      switch rawValue {
+      case 0: self = .none
+      case 1: self = .option
+      case 2: self = .control
+      case 3: self = .shift
+      default: self = .UNRECOGNIZED(rawValue)
+      }
+    }
+
+    var rawValue: Int {
+      switch self {
+      case .none: return 0
+      case .option: return 1
+      case .control: return 2
+      case .shift: return 3
+      case .UNRECOGNIZED(let i): return i
+      }
+    }
+
+  }
+
+  init() {}
+}
+
+#if swift(>=4.2)
+
+extension KeyStroke.Key: CaseIterable {
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  static var allCases: [KeyStroke.Key] = [
+    .unknown,
+    .key1,
+    .key2,
+    .key3,
+    .key4,
+    .key5,
+    .key6,
+    .key7,
+    .key8,
+    .key9,
+    .key0,
+    .minus,
+    .equals,
+    .arrowUp,
+    .arrowDown,
+    .arrowLeft,
+    .arrowRight,
+    .i,
+  ]
+}
+
+extension KeyStroke.Modifier: CaseIterable {
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  static var allCases: [KeyStroke.Modifier] = [
+    .none,
+    .option,
+    .control,
+    .shift,
+  ]
+}
+
+#endif  // swift(>=4.2)
+
+struct KeyboardResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 extension MemoryReadRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
@@ -220,6 +392,92 @@ extension MemoryWriteResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
   static func ==(lhs: MemoryWriteResponse, rhs: MemoryWriteResponse) -> Bool {
     if lhs.address != rhs.address {return false}
     if lhs.resultCode != rhs.resultCode {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension KeyStroke: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = "KeyStroke"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "key"),
+    2: .same(proto: "modifier"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularEnumField(value: &self.key)
+      case 2: try decoder.decodeSingularEnumField(value: &self.modifier)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.key != .unknown {
+      try visitor.visitSingularEnumField(value: self.key, fieldNumber: 1)
+    }
+    if self.modifier != .none {
+      try visitor.visitSingularEnumField(value: self.modifier, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: KeyStroke, rhs: KeyStroke) -> Bool {
+    if lhs.key != rhs.key {return false}
+    if lhs.modifier != rhs.modifier {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension KeyStroke.Key: SwiftProtobuf._ProtoNameProviding {
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "UNKNOWN"),
+    1: .same(proto: "KEY1"),
+    2: .same(proto: "KEY2"),
+    3: .same(proto: "KEY3"),
+    4: .same(proto: "KEY4"),
+    5: .same(proto: "KEY5"),
+    6: .same(proto: "KEY6"),
+    7: .same(proto: "KEY7"),
+    8: .same(proto: "KEY8"),
+    9: .same(proto: "KEY9"),
+    10: .same(proto: "KEY0"),
+    11: .same(proto: "KEY_MINUS"),
+    12: .same(proto: "KEY_EQUALS"),
+    101: .same(proto: "KEY_ARROW_UP"),
+    102: .same(proto: "KEY_ARROW_DOWN"),
+    103: .same(proto: "KEY_ARROW_LEFT"),
+    104: .same(proto: "KEY_ARROW_RIGHT"),
+    201: .same(proto: "KEY_I"),
+  ]
+}
+
+extension KeyStroke.Modifier: SwiftProtobuf._ProtoNameProviding {
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "NONE"),
+    1: .same(proto: "OPTION"),
+    2: .same(proto: "CONTROL"),
+    3: .same(proto: "SHIFT"),
+  ]
+}
+
+extension KeyboardResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = "KeyboardResponse"
+  static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let _ = try decoder.nextFieldNumber() {
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: KeyboardResponse, rhs: KeyboardResponse) -> Bool {
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
