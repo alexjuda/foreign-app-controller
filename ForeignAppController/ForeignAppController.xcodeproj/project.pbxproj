@@ -41,6 +41,7 @@
 		FA56E73C21F4CE4300EFAEB6 /* API.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.pb.swift; sourceTree = "<group>"; };
 		FA56E73D21F4CE4300EFAEB6 /* API.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.grpc.swift; sourceTree = "<group>"; };
 		FA56E73F21F4CE4300EFAEB6 /* API.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; path = API.proto; sourceTree = "<group>"; };
+		FA56E74321F4CF2D00EFAEB6 /* ForeignAppController-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ForeignAppController-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +120,7 @@
 			children = (
 				FA56E73C21F4CE4300EFAEB6 /* API.pb.swift */,
 				FA56E73D21F4CE4300EFAEB6 /* API.grpc.swift */,
+				FA56E74321F4CF2D00EFAEB6 /* ForeignAppController-Bridging-Header.h */,
 			);
 			path = Generated;
 			sourceTree = "<group>";
@@ -163,6 +165,7 @@
 				TargetAttributes = {
 					FA56E69B21F4951500EFAEB6 = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1000;
 					};
 				};
 			};
@@ -316,6 +319,7 @@
 		FA56E6A421F4951500EFAEB6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A72LSA5UB5;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -323,7 +327,14 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Vendor",
 				);
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Services/Generated/ForeignAppController-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
@@ -331,6 +342,7 @@
 		FA56E6A521F4951500EFAEB6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A72LSA5UB5;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -338,7 +350,13 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Vendor",
 				);
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Services/Generated/ForeignAppController-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
