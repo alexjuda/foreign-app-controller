@@ -18,10 +18,27 @@
 		FA56E74C21F4D00900EFAEB6 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA56E74721F4D00800EFAEB6 /* Coordinator.swift */; };
 		FA56E74D21F4D00900EFAEB6 /* TargetMemoryIO.m in Sources */ = {isa = PBXBuildFile; fileRef = FA56E74A21F4D00800EFAEB6 /* TargetMemoryIO.m */; };
 		FA56E74E21F4D00900EFAEB6 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA56E74B21F4D00900EFAEB6 /* API.swift */; };
+		FA56E75621F4D37F00EFAEB6 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA56E75521F4D37F00EFAEB6 /* main.swift */; };
+		FA56E75A21F4D3A700EFAEB6 /* BoringSSL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA56E72F21F4CC3000EFAEB6 /* BoringSSL.framework */; };
+		FA56E75B21F4D3A700EFAEB6 /* CgRPC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA56E73121F4CC3000EFAEB6 /* CgRPC.framework */; };
+		FA56E75C21F4D3A700EFAEB6 /* SwiftGRPC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA56E73221F4CC3000EFAEB6 /* SwiftGRPC.framework */; };
+		FA56E75D21F4D3A700EFAEB6 /* SwiftProtobuf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA56E73021F4CC3000EFAEB6 /* SwiftProtobuf.framework */; };
+		FA56E75E21F4D3C700EFAEB6 /* API.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA56E73C21F4CE4300EFAEB6 /* API.pb.swift */; };
+		FA56E75F21F4D3FF00EFAEB6 /* API.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA56E73D21F4CE4300EFAEB6 /* API.grpc.swift */; };
+		FA56E76021F4D45100EFAEB6 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FA56E73821F4CCA600EFAEB6 /* libz.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		FA56E69A21F4951500EFAEB6 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		FA56E75121F4D37F00EFAEB6 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -48,6 +65,8 @@
 		FA56E74921F4D00800EFAEB6 /* TargetMemoryIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TargetMemoryIO.h; sourceTree = "<group>"; };
 		FA56E74A21F4D00800EFAEB6 /* TargetMemoryIO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TargetMemoryIO.m; sourceTree = "<group>"; };
 		FA56E74B21F4D00900EFAEB6 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		FA56E75321F4D37F00EFAEB6 /* example-fac-client */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "example-fac-client"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA56E75521F4D37F00EFAEB6 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +82,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FA56E75021F4D37F00EFAEB6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA56E76021F4D45100EFAEB6 /* libz.tbd in Frameworks */,
+				FA56E75A21F4D3A700EFAEB6 /* BoringSSL.framework in Frameworks */,
+				FA56E75B21F4D3A700EFAEB6 /* CgRPC.framework in Frameworks */,
+				FA56E75C21F4D3A700EFAEB6 /* SwiftGRPC.framework in Frameworks */,
+				FA56E75D21F4D3A700EFAEB6 /* SwiftProtobuf.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -71,6 +102,7 @@
 			children = (
 				FA56E73A21F4CE4300EFAEB6 /* Services */,
 				FA56E69E21F4951500EFAEB6 /* ForeignAppController */,
+				FA56E75421F4D37F00EFAEB6 /* example-fac-client */,
 				FA56E69D21F4951500EFAEB6 /* Products */,
 				FA56E6C221F4C84200EFAEB6 /* Vendor */,
 				FA56E73721F4CCA600EFAEB6 /* Frameworks */,
@@ -81,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				FA56E69C21F4951500EFAEB6 /* ForeignAppController */,
+				FA56E75321F4D37F00EFAEB6 /* example-fac-client */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -88,12 +121,12 @@
 		FA56E69E21F4951500EFAEB6 /* ForeignAppController */ = {
 			isa = PBXGroup;
 			children = (
+				FA56E69F21F4951500EFAEB6 /* main.swift */,
 				FA56E74B21F4D00900EFAEB6 /* API.swift */,
 				FA56E74721F4D00800EFAEB6 /* Coordinator.swift */,
 				FA56E74821F4D00800EFAEB6 /* ForeignAppController-Bridging-Header.h */,
 				FA56E74921F4D00800EFAEB6 /* TargetMemoryIO.h */,
 				FA56E74A21F4D00800EFAEB6 /* TargetMemoryIO.m */,
-				FA56E69F21F4951500EFAEB6 /* main.swift */,
 			);
 			path = ForeignAppController;
 			sourceTree = "<group>";
@@ -143,6 +176,14 @@
 			path = Protos;
 			sourceTree = "<group>";
 		};
+		FA56E75421F4D37F00EFAEB6 /* example-fac-client */ = {
+			isa = PBXGroup;
+			children = (
+				FA56E75521F4D37F00EFAEB6 /* main.swift */,
+			);
+			path = "example-fac-client";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -163,6 +204,23 @@
 			productReference = FA56E69C21F4951500EFAEB6 /* ForeignAppController */;
 			productType = "com.apple.product-type.tool";
 		};
+		FA56E75221F4D37F00EFAEB6 /* example-fac-client */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FA56E75721F4D37F00EFAEB6 /* Build configuration list for PBXNativeTarget "example-fac-client" */;
+			buildPhases = (
+				FA56E74F21F4D37F00EFAEB6 /* Sources */,
+				FA56E75021F4D37F00EFAEB6 /* Frameworks */,
+				FA56E75121F4D37F00EFAEB6 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "example-fac-client";
+			productName = "example-fac-client";
+			productReference = FA56E75321F4D37F00EFAEB6 /* example-fac-client */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -176,6 +234,9 @@
 					FA56E69B21F4951500EFAEB6 = {
 						CreatedOnToolsVersion = 10.0;
 						LastSwiftMigration = 1000;
+					};
+					FA56E75221F4D37F00EFAEB6 = {
+						CreatedOnToolsVersion = 10.0;
 					};
 				};
 			};
@@ -192,6 +253,7 @@
 			projectRoot = "";
 			targets = (
 				FA56E69B21F4951500EFAEB6 /* ForeignAppController */,
+				FA56E75221F4D37F00EFAEB6 /* example-fac-client */,
 			);
 		};
 /* End PBXProject section */
@@ -207,6 +269,16 @@
 				FA56E74021F4CE4800EFAEB6 /* API.pb.swift in Sources */,
 				FA56E74121F4CE4800EFAEB6 /* API.grpc.swift in Sources */,
 				FA56E74E21F4D00900EFAEB6 /* API.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA56E74F21F4D37F00EFAEB6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA56E75621F4D37F00EFAEB6 /* main.swift in Sources */,
+				FA56E75E21F4D3C700EFAEB6 /* API.pb.swift in Sources */,
+				FA56E75F21F4D3FF00EFAEB6 /* API.grpc.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,6 +445,34 @@
 			};
 			name = Release;
 		};
+		FA56E75821F4D37F00EFAEB6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = A72LSA5UB5;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Vendor",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		FA56E75921F4D37F00EFAEB6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = A72LSA5UB5;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Vendor",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -390,6 +490,15 @@
 			buildConfigurations = (
 				FA56E6A421F4951500EFAEB6 /* Debug */,
 				FA56E6A521F4951500EFAEB6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FA56E75721F4D37F00EFAEB6 /* Build configuration list for PBXNativeTarget "example-fac-client" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA56E75821F4D37F00EFAEB6 /* Debug */,
+				FA56E75921F4D37F00EFAEB6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
