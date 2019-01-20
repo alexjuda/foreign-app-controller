@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct APIMemoryIO: MemoryIOProvider {
+struct MemoryIOAdapter: MemoryIOProvider {
     let targetMemIO = TargetMemoryIO()
     let pid: pid_t
     

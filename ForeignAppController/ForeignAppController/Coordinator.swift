@@ -11,12 +11,12 @@ import SwiftGRPC
 import AppKit
 
 class Coordinator {
-    let apiMemIO: APIMemoryIO
+    let memIO: MemoryIOAdapter
     let server: ServiceServer
     
     init(targetPID: pid_t, serverAddress: String = "localhost:1337") {
-        apiMemIO = APIMemoryIO(pid: targetPID)
-        server = ServiceServer(address: serverAddress, serviceProviders: [apiMemIO])
+        memIO = MemoryIOAdapter(pid: targetPID)
+        server = ServiceServer(address: serverAddress, serviceProviders: [memIO])
     }
     
     func start() {
