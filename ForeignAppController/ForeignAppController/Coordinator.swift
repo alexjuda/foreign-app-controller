@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftGRPC
+import AppKit
 
 class Coordinator {
     let apiMemIO: APIMemoryIO

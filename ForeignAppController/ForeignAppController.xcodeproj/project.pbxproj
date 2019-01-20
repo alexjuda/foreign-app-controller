@@ -16,6 +16,9 @@
 		FA56E74021F4CE4800EFAEB6 /* API.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA56E73C21F4CE4300EFAEB6 /* API.pb.swift */; };
 		FA56E74121F4CE4800EFAEB6 /* API.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA56E73D21F4CE4300EFAEB6 /* API.grpc.swift */; };
 		FA56E74221F4CE4800EFAEB6 /* API.proto in Sources */ = {isa = PBXBuildFile; fileRef = FA56E73F21F4CE4300EFAEB6 /* API.proto */; };
+		FA56E74C21F4D00900EFAEB6 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA56E74721F4D00800EFAEB6 /* Coordinator.swift */; };
+		FA56E74D21F4D00900EFAEB6 /* TargetMemoryIO.m in Sources */ = {isa = PBXBuildFile; fileRef = FA56E74A21F4D00800EFAEB6 /* TargetMemoryIO.m */; };
+		FA56E74E21F4D00900EFAEB6 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA56E74B21F4D00900EFAEB6 /* API.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -41,7 +44,11 @@
 		FA56E73C21F4CE4300EFAEB6 /* API.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.pb.swift; sourceTree = "<group>"; };
 		FA56E73D21F4CE4300EFAEB6 /* API.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.grpc.swift; sourceTree = "<group>"; };
 		FA56E73F21F4CE4300EFAEB6 /* API.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; path = API.proto; sourceTree = "<group>"; };
-		FA56E74321F4CF2D00EFAEB6 /* ForeignAppController-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ForeignAppController-Bridging-Header.h"; sourceTree = "<group>"; };
+		FA56E74721F4D00800EFAEB6 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		FA56E74821F4D00800EFAEB6 /* ForeignAppController-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ForeignAppController-Bridging-Header.h"; sourceTree = "<group>"; };
+		FA56E74921F4D00800EFAEB6 /* TargetMemoryIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TargetMemoryIO.h; sourceTree = "<group>"; };
+		FA56E74A21F4D00800EFAEB6 /* TargetMemoryIO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TargetMemoryIO.m; sourceTree = "<group>"; };
+		FA56E74B21F4D00900EFAEB6 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +89,11 @@
 		FA56E69E21F4951500EFAEB6 /* ForeignAppController */ = {
 			isa = PBXGroup;
 			children = (
+				FA56E74B21F4D00900EFAEB6 /* API.swift */,
+				FA56E74721F4D00800EFAEB6 /* Coordinator.swift */,
+				FA56E74821F4D00800EFAEB6 /* ForeignAppController-Bridging-Header.h */,
+				FA56E74921F4D00800EFAEB6 /* TargetMemoryIO.h */,
+				FA56E74A21F4D00800EFAEB6 /* TargetMemoryIO.m */,
 				FA56E69F21F4951500EFAEB6 /* main.swift */,
 			);
 			path = ForeignAppController;
@@ -120,7 +132,6 @@
 			children = (
 				FA56E73C21F4CE4300EFAEB6 /* API.pb.swift */,
 				FA56E73D21F4CE4300EFAEB6 /* API.grpc.swift */,
-				FA56E74321F4CF2D00EFAEB6 /* ForeignAppController-Bridging-Header.h */,
 			);
 			path = Generated;
 			sourceTree = "<group>";
@@ -193,8 +204,11 @@
 			files = (
 				FA56E6A021F4951500EFAEB6 /* main.swift in Sources */,
 				FA56E74221F4CE4800EFAEB6 /* API.proto in Sources */,
+				FA56E74C21F4D00900EFAEB6 /* Coordinator.swift in Sources */,
+				FA56E74D21F4D00900EFAEB6 /* TargetMemoryIO.m in Sources */,
 				FA56E74021F4CE4800EFAEB6 /* API.pb.swift in Sources */,
 				FA56E74121F4CE4800EFAEB6 /* API.grpc.swift in Sources */,
+				FA56E74E21F4D00900EFAEB6 /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,7 +347,7 @@
 					"@loader_path/../Frameworks",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Services/Generated/ForeignAppController-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "ForeignAppController/ForeignAppController-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 			};
@@ -356,7 +370,7 @@
 					"@loader_path/../Frameworks",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Services/Generated/ForeignAppController-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "ForeignAppController/ForeignAppController-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
