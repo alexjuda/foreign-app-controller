@@ -8,7 +8,7 @@ message MemoryReadRequest {
 message MemoryReadResponse {
     uint32 address = 1;
     bytes read_bytes = 2;
-    uint32 kernel_result = 3;
+    int32 kernel_result = 3;
 }
 
 service MemoryIO {

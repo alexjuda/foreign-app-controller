@@ -42,7 +42,7 @@ struct MemoryReadResponse {
 
   var readBytes: Data = SwiftProtobuf.Internal.emptyData
 
-  var kernelResult: UInt32 = 0
+  var kernelResult: Int32 = 0
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -99,7 +99,7 @@ extension MemoryReadResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
       switch fieldNumber {
       case 1: try decoder.decodeSingularUInt32Field(value: &self.address)
       case 2: try decoder.decodeSingularBytesField(value: &self.readBytes)
-      case 3: try decoder.decodeSingularUInt32Field(value: &self.kernelResult)
+      case 3: try decoder.decodeSingularInt32Field(value: &self.kernelResult)
       default: break
       }
     }
@@ -113,7 +113,7 @@ extension MemoryReadResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
       try visitor.visitSingularBytesField(value: self.readBytes, fieldNumber: 2)
     }
     if self.kernelResult != 0 {
-      try visitor.visitSingularUInt32Field(value: self.kernelResult, fieldNumber: 3)
+      try visitor.visitSingularInt32Field(value: self.kernelResult, fieldNumber: 3)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
