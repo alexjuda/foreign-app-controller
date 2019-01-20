@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import SwiftProtobuf
 
 print("Hello, World!")
 
+print(SwiftProtobuf.Version.versionString)
