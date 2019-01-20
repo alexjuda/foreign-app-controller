@@ -27,7 +27,7 @@ struct APIMemoryIO: MemoryIOProvider {
         } catch let error as NSError {
             var response = MemoryReadResponse()
             response.address = request.address
-            response.kernelResult = Int32(error.code)
+            response.resultCode = Int32(error.code)
             return response
         }
     }

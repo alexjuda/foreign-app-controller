@@ -42,7 +42,7 @@ struct MemoryReadResponse {
 
   var readBytes: Data = SwiftProtobuf.Internal.emptyData
 
-  var kernelResult: Int32 = 0
+  var resultCode: Int32 = 0
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -91,7 +91,7 @@ extension MemoryReadResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "address"),
     2: .standard(proto: "read_bytes"),
-    3: .standard(proto: "kernel_result"),
+    3: .standard(proto: "result_code"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -99,7 +99,7 @@ extension MemoryReadResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
       switch fieldNumber {
       case 1: try decoder.decodeSingularUInt32Field(value: &self.address)
       case 2: try decoder.decodeSingularBytesField(value: &self.readBytes)
-      case 3: try decoder.decodeSingularInt32Field(value: &self.kernelResult)
+      case 3: try decoder.decodeSingularInt32Field(value: &self.resultCode)
       default: break
       }
     }
@@ -112,8 +112,8 @@ extension MemoryReadResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
     if !self.readBytes.isEmpty {
       try visitor.visitSingularBytesField(value: self.readBytes, fieldNumber: 2)
     }
-    if self.kernelResult != 0 {
-      try visitor.visitSingularInt32Field(value: self.kernelResult, fieldNumber: 3)
+    if self.resultCode != 0 {
+      try visitor.visitSingularInt32Field(value: self.resultCode, fieldNumber: 3)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -121,7 +121,7 @@ extension MemoryReadResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
   static func ==(lhs: MemoryReadResponse, rhs: MemoryReadResponse) -> Bool {
     if lhs.address != rhs.address {return false}
     if lhs.readBytes != rhs.readBytes {return false}
-    if lhs.kernelResult != rhs.kernelResult {return false}
+    if lhs.resultCode != rhs.resultCode {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
